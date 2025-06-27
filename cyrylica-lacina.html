@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NKWD</title>
+    </head>
+    <body>
+        <h1>program nie obsługuje znaków: ą, ć, ę, ł, ń, ó, ś, ź</h1>
+        <h1 id="naglowekZCyrylica">Twój tekst to: </h1>
+        <script>
+            let lacina = ["a", "ą", "b", "c", "ć", "d", "e", 'ę', "f", "g", "h", "i", "j", "k", "l", "ł", "m", "n", "o", "ó", "p", "r", "s", "t", "u", "w", "y", "z", "ż", "ź", " "];
+            let cyrylica = ["a", "a", "б", "ц", "ц", 'д','є', 'є', "ф", 'г', "x", 'и', 'ї', "к", "л", "л", "м", "н", "о", "у", "п", "р", "с", "т", "у", "в", "ы", "з", "ж", "з", " "];
+            let zamianaAlfabetu = function(literaŁacińska) {
+                let literaWCyrylicy = cyrylica[lacina.indexOf(literaŁacińska)];
+                return literaWCyrylicy;
+            };
+            let tekstDoPrzetłumaczenia=prompt("Podaj tekst do przetłumaczenia na cyrylicę")
+            function przetłumaczNaCyrylice(tekst) {
+                let litery=[];
+                 for (let i = 0; i < tekst.length; i++) {
+                litery.push(zamianaAlfabetu(tekst[i]));
+                 }
+                return litery.join("");
+            };
+            let elementNaglowkowy=document.getElementById("naglowekZCyrylica");
+            elementNaglowkowy.innerHTML = "Twój tekst to: " + przetłumaczNaCyrylice(tekstDoPrzetłumaczenia);
+        </script>
+    </body>
+</html>
