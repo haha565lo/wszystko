@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NKWD</title>
+    </head>
+    <body>
+        <h1>program nie obsługuje znaków: ą, ć, ę, ł, ń, ó, ś, ź</h1>
+        <h1 id="naglowekZCyrylica">Twój tekst to: </h1>
+        <script>
+            
+            let lacina = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "w", "y", "z", "ż"];
+          let cyrylica = ["a", "б", "ц", 'д', 'є', "ф", 'г', "x", 'и', 'ї', "к", "л", "м", "н", "о", "п", "р", "с", "т", "у", "в", "ы", "з", "ж"];
+
+            /*let przesunięcie = function(litera, oIle) {
+                if (lacina.indexOf(litera) + oIle <= lacina.length) { 
+                    return lacina[lacina.indexOf(litera) + oIle];
+                } else {
+                    return lacina[lacina.indexOf(litera) + oIle - lacina.length];
+                };
+
+            };*/
+            function przesunięcie(litera, oIle) {
+            if (litera === " ") return " ";
+            const index = lacina.indexOf(litera);
+            if (index === -1) return "?";
+            return lacina[(index + oIle) % lacina.length];
+            }
+
+             function zamianaAlfabetu(literaLacinska) {
+            if (literaLacinska === " ") return " ";
+            const index = lacina.indexOf(literaLacinska);
+            if (index === -1) return "?";
+            return cyrylica[index];
+            }
+
+            let tekstDoPrzetłumaczenia=prompt("Podaj tekst do przetłumaczenia na cyrylicę")
+            
+            function zakoduj(tekst) {
+                let litery=[];
+                for(let i=0; i<tekst.length; i++) {
+                    litery.push(przesunięcie(tekst[i], 7));
+                }
+                
+                for (let i = 0; i < tekst.length; i++) {
+                    litery[i] = zamianaAlfabetu(litery[i]);
+                }
+                return litery.join("");
+            };
+            
+            let elementNaglowkowy=document.getElementById("naglowekZCyrylica");
+            elementNaglowkowy.innerHTML = "Twój tekst to: " + zakoduj(tekstDoPrzetłumaczenia);
+        </script>
+    </body>
+</html>
